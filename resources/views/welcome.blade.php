@@ -19,6 +19,6 @@
         <p class="font-black">GiraFR</p>
         <p class="text-3xl">Record your finance</p>
     </div>
-    <a href="/login-form" class="px-6 py-3 text-xl font-medium text-white transition transform duration-50 rounded-xl active:scale-100 hover:scale-110 bg-slate-900">Start now</a>
+    <a href="/login" class="px-6 py-3 text-xl font-medium text-white transition transform duration-50 rounded-xl active:scale-100 hover:scale-110 bg-slate-900">Start now</a>
 </body>
 </html>

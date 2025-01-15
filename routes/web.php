@@ -1,18 +1,30 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('home');
-});
-
-Route::get('/login-form', function () {
+Route::get('/login', function () {
     return view('auth.login');
+})->name('login');
+
+Route::post('/login/submit', [AuthController::class, 'login'])->name('login.submit');
+
+Route::get('/register', function () {
+    return view('auth.register');
 });
 
-Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
+Route::post('/register/submit', [AuthController::class, 'register'])->name('register.submit');
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/home', function () {
+        return view('home');
+    });
+});
