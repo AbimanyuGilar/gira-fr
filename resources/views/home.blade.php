@@ -62,7 +62,7 @@
                     </p>
                     <p>
                         Select Month:
-                        <x-drop-down name="Month" :items="['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'Desember']"></x-drop-down>
+                        <x-drop-down name="Month" :items="['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"></x-drop-down>
                     </p>
                     <p>
                         Select Day:

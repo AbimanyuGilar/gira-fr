@@ -1,0 +1,7 @@
+Masalah yang harus diselesaikan di project GiraFR
+
+- Membuat agar nilai current balance, total income, dan total expenses mengambil semua data tanpa filter
+- Membuat default filternya menjadi saat ini, misal (Semua hari di bulan januari tahun 2025)
+- Membuat filter pilihan tampil di url sebagai ?filter=nilaiFilter
+- Membuat agar baris di samping kiri menampilkan data sesuai dengan filter di url
+- Membuat nilai current balance, total income, dan total expense di tengah mengambil dari data sesuai filter
