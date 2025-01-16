@@ -22,9 +22,7 @@ class AuthController extends Controller
             return redirect()->intended('home');
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        return back()->with('error', 'Wrong email or password');
     }
 
     public function register (Request $request): RedirectResponse

@@ -14,7 +14,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="flex flex-col items-center justify-center h-screen bg-slate-100">
-    <div class="flex items-center justify-center bg-white h-80 md:h-2/4 lg:h-2/4 aspect-square drop-shadow-lg rounded-xl">
+    <div class="flex flex-col items-center justify-center bg-white h-80 md:h-2/4 lg:h-2/4 aspect-square drop-shadow-lg rounded-xl">
         <form method="POST" action="{{ route('login.submit') }}" class="flex flex-col items-center justify-center">
             @csrf
             <x-input type="email" name="email" placeholder="email"></x-input>
@@ -24,6 +24,9 @@
                     Login
                 </x-primary-button>
             </button>
+            @if (session('error'))
+                <p class="text-red-600">{{ session('error') }}</p>
+            @endif
             <p>Don't have an account? <a href="/register" class="text-blue-600">Register now</a></p>
         </form>
     </div>
