@@ -56,9 +56,24 @@
 
             <div>
                 <div class="flex flex-col my-5 text-xl">
-                    <p>Select Year: 2025</p>
-                    <p>Select Month: January</p>
-                    <p>Select Day: All</p>
+                    <p>
+                        Select Year:
+                        <x-drop-down name="Year" :items="['2020', '2021', '2022', '2023', '2024', '2025']"></x-drop-down>
+                    </p>
+                    <p>
+                        Select Month:
+                        <x-drop-down name="Month" :items="['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'Desember']"></x-drop-down>
+                    </p>
+                    <p>
+                        Select Day:
+                        @php
+                            $days = [];
+                            for ($day = 1; $day <= 31; $day++) {
+                                array_push($days, $day);
+                            }
+                        @endphp
+                        <x-drop-down name="Day" :items="$days"></x-drop-down>
+                    </p>
                 </div>
 
                 <div class="flex flex-col my-5 text-xl">
@@ -79,5 +94,7 @@
             </div>
         </div>
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
 </body>
 </html>
