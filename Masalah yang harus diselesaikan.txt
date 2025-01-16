@@ -5,3 +5,4 @@ Masalah yang harus diselesaikan di project GiraFR
 - Membuat filter pilihan tampil di url sebagai ?filter=nilaiFilter
 - Membuat agar baris di samping kiri menampilkan data sesuai dengan filter di url
 - Membuat nilai current balance, total income, dan total expense di tengah mengambil dari data sesuai filter
+- Membuat crud untuk transactions

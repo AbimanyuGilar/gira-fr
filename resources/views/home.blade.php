@@ -22,8 +22,8 @@
     <main class="flex items-center justify-center flex-grow bg-slate-200">
         <div class="grid grid-cols-3 bg-white shadow-xl h-[750px] w-[1500px] rounded-xl p-5 gap-4">
             <div class="overflow-y-scroll">
-                @foreach ($transactions as $transaction )
-                    <div class="flex justify-end p-3 my-2 border-2 rounded-md border-slate-900 h-28">
+                @foreach ($filteredTransactions as $transaction )
+                    <div class="flex justify-end p-3 my-2 border-2 rounded-md hover:bg-gray-50 border-slate-900 h-28">
                         <div class="grid w-full grid-cols-1 rounded-xl">
                             @if ($transaction->type == 'income')
                                 <p class="text-xl">{{ $transaction->type }}<span class="text-green-700">{{ ' +Rp' . number_format($transaction->amount, 0, ',', '.'); }}</span></p>
@@ -55,31 +55,43 @@
             </div>
 
             <div>
-                <div class="flex flex-col my-5 text-xl">
+                <form id="filter" method="GET" action="{{ route('home.index') }}" class="flex flex-col my-5 text-xl">
                     <p>
                         Select Year:
-                        <x-drop-down name="Year" :items="['2020', '2021', '2022', '2023', '2024', '2025']"></x-drop-down>
+                        @php
+                            $years = [];
+                            for ($year_ = 2019; $year_ <= date('Y'); $year_++) {
+                                array_push($years, $year_);
+                            }
+                        @endphp
+                        <x-drop-down name="year" :items="array_reverse($years)" current="{{ $year }}"></x-drop-down>
                     </p>
                     <p>
                         Select Month:
-                        <x-drop-down name="Month" :items="['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"></x-drop-down>
+                        @php
+                            $months = [];
+                            for ($month_ = 1; $month_ <= 12; $month_++) {
+                                array_push($months, $month_);
+                            }
+                        @endphp
+                        <x-drop-down name="month" :items="$months" current="{{ $month }}"></x-drop-down>
                     </p>
                     <p>
                         Select Day:
                         @php
                             $days = [];
-                            for ($day = 1; $day <= 31; $day++) {
-                                array_push($days, $day);
+                            for ($day_ = 1; $day_ <= 31; $day_++) {
+                                array_push($days, $day_);
                             }
                         @endphp
-                        <x-drop-down name="Day" :items="$days"></x-drop-down>
+                        <x-drop-down name="day" :items="$days" current="{{ $day }}"></x-drop-down>
                     </p>
-                </div>
+                </form>
 
                 <div class="flex flex-col my-5 text-xl">
                     @php
-                        $totalIncome = $transactions->where('type', 'income')->sum('amount');
-                        $totalExpenses = $transactions->where('type', 'expenses')->sum('amount');
+                        $totalIncome = $allTransactions->where('type', 'income')->sum('amount');
+                        $totalExpenses = $allTransactions->where('type', 'expenses')->sum('amount');
                         $currentBalance = $totalIncome - $totalExpenses;
                     @endphp
                     <p>Current Money: <span class="text-blue-500">{{ 'Rp'.number_format($currentBalance, 0, ',', '.'); }}</span></p>

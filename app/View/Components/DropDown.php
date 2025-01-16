@@ -11,7 +11,7 @@ class DropDown extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public array $items, public string $name)
+    public function __construct(public array $items, public string $name, public string $current)
     {
         //
     }

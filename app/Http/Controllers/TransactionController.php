@@ -11,12 +11,18 @@ class TransactionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
-        $transactions = $user->transactions;
+        $allTransactions = $user->transactions;
 
-        return view('home', compact('transactions'));
+        $year = $request->year ? $request->year : date('Y');
+        $month = $request->month ? $request->month : date('m');
+        $day = $request->day ? $request->day : date('d');
+
+        $filteredTransactions = $user->transactions()->whereYear('transaction_date', $year)->whereMonth('transaction_date', $month)->whereDay('transaction_date', $day)->get();
+
+        return view('home', compact('allTransactions', 'filteredTransactions', 'year', 'month', 'day'));
     }
 
     /**
