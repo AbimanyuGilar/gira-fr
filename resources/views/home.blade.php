@@ -16,14 +16,14 @@
 <body class="flex flex-col h-screen">
     <header class="flex items-center justify-between h-16 px-6 text-white bg-slate-900">
         <p>GiraFR</p>
-        <p>{{ Auth::user()->name }}</p>
+        <p>{{ $user->name }}</p>
     </header>
 
     <main class="flex items-center justify-center flex-grow bg-slate-200">
         <div class="grid grid-cols-3 bg-white shadow-xl h-[750px] w-[1500px] rounded-xl p-5 gap-4">
             <div class="overflow-y-scroll">
                 @foreach ($filteredTransactions as $transaction )
-                    <div class="flex justify-end p-3 my-2 border-2 rounded-md hover:bg-gray-50 border-slate-900 h-28">
+                    <div class="flex justify-end p-3 my-2 border-2 rounded-md hover:bg-gray-50 border-slate-900 h-28" onclick="event.preventDefault(); document.getElementById('selected').value='{{ $transaction->id }}'; document.getElementById('filter').submit()">
                         <div class="grid w-full grid-cols-1 rounded-xl">
                             @if ($transaction->type == 'income')
                                 <p class="text-xl">{{ $transaction->type }}<span class="text-green-700">{{ ' +Rp' . number_format($transaction->amount, 0, ',', '.'); }}</span></p>
@@ -41,21 +41,30 @@
             </div>
 
             <div class="grid grid-rows-3 p-10 border-2 border-slate-900 aspect-square rounded-xl">
-                <div>
-                    <p class="text-5xl">Income</p>
-                    <p class="text-5xl text-green-500">+ Rp100.000</p>
-                </div>
-                <div>
-                    <p class="text-3xl">Notes:</p>
-                    <p class="text-base">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est quo cum, consequuntur quaerat voluptas saepe autem totam reprehenderit fuga, illum impedit? Aspernatur natus obcaecati iusto nihil. Vero nostrum provident amet.</p>
-                </div>
-                <div class="flex items-end">
-                    <p class="text-5xl">16 January 2025</p>
-                </div>
+                @if ($selectedTransaction)
+                    <div>
+                        <p class="text-5xl">{{ $selectedTransaction->type }}</p>
+                        @if ($selectedTransaction->type == 'income')
+                            <p class="text-5xl text-green-500">{{ '+ Rp' . number_format($selectedTransaction->amount, 0, ',', '.'); }}</p>
+                        @else
+                            <p class="text-5xl text-red-500">{{ '- Rp' . number_format($selectedTransaction->amount, 0, ',', '.'); }}</p>
+                        @endif
+                    </div>
+                    <div>
+                        <p class="text-3xl">Notes:</p>
+                        <p class="text-base">{{ $selectedTransaction->description ? $selectedTransaction->description : '-' }}</p>
+                    </div>
+                    <div class="flex items-end">
+                        <p class="text-5xl">{{ \Carbon\Carbon::parse($selectedTransaction->transaction_date)->format('d M Y') }}</p>
+                    </div>
+                @else
+                    <p>Nohing Selected</p>
+                @endif
             </div>
 
             <div>
                 <form id="filter" method="GET" action="{{ route('home.index') }}" class="flex flex-col my-5 text-xl">
+                    <input type="hidden" name="selected" id="selected" value="{{ $selectedTransaction ? $selectedTransaction->id : 'nothing' }}">
                     <p>
                         Select Year:
                         @php

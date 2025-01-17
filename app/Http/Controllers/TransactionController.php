@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,9 +21,12 @@ class TransactionController extends Controller
         $month = $request->month ? $request->month : date('m');
         $day = $request->day ? $request->day : date('d');
 
-        $filteredTransactions = $user->transactions()->whereYear('transaction_date', $year)->whereMonth('transaction_date', $month)->whereDay('transaction_date', $day)->get();
+        $filteredTransactions = $user->transactions()->whereYear('transaction_date', $year)->whereMonth('transaction_date', $month)->whereDay('transaction_date', $day)->orderBy('id', 'desc')->get();
 
-        return view('home', compact('allTransactions', 'filteredTransactions', 'year', 'month', 'day'));
+        $selectedTransaction = $filteredTransactions->firstWhere('id', $request->selected);
+
+        return view('home', compact('user', 'allTransactions', 'filteredTransactions', 'selectedTransaction', 'year', 'month', 'day'));
+        return($selectedTransaction);
     }
 
     /**
