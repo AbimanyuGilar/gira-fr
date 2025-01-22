@@ -63,7 +63,7 @@
             </div>
 
             <div>
-                <form id="filter" method="GET" action="{{ route('home.index') }}" class="flex flex-col my-5 text-xl">
+                <form id="filter" method="GET" action="{{ route('transactions.index') }}" class="flex flex-col my-5 text-xl">
                     <input type="hidden" name="selected" id="selected" value="{{ $selectedTransaction ? $selectedTransaction->id : 'nothing' }}">
                     <p>
                         Select Year:
@@ -108,7 +108,7 @@
                     <p>Total Expenses: <span class="text-red-500">{{ 'Rp'.number_format($totalExpenses, 0, ',', '.'); }}</span></p>
                 </div>
                 <div class="w-2/4 text-center transition transform duration-50 active:scale-100 hover:scale-110">
-                    <a href="#" class="">
+                    <a href="{{ route('add.transaction') }}" class="">
                         <x-primary-button>Add transaction</x-primary-button>
                     </a>
                 </div>

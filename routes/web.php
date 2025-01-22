@@ -25,5 +25,8 @@ Route::post('/register/submit', [AuthController::class, 'register'])->name('regi
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 Route::middleware('auth')->group(function () {
-    Route::resource('/home', TransactionController::class);
+    Route::get('/transactions/add', function () {
+        return view('add-transaction');
+    })->name('add.transaction');
+    Route::resource('/transactions', TransactionController::class);
 });

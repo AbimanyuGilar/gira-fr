@@ -25,7 +25,7 @@ class TransactionController extends Controller
 
         $selectedTransaction = $filteredTransactions->firstWhere('id', $request->selected);
 
-        return view('home', compact('user', 'allTransactions', 'filteredTransactions', 'selectedTransaction', 'year', 'month', 'day'));
+        return view('transactions', compact('user', 'allTransactions', 'filteredTransactions', 'selectedTransaction', 'year', 'month', 'day'));
         return($selectedTransaction);
     }
 
