@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TransactionController;
 
 Route::get('/', function () {
@@ -25,8 +23,5 @@ Route::post('/register/submit', [AuthController::class, 'register'])->name('regi
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/transactions/add', function () {
-        return view('add-transaction');
-    })->name('add.transaction');
     Route::resource('/transactions', TransactionController::class);
 });

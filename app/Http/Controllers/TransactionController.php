@@ -34,7 +34,9 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
+        $user = Auth::user();
+
+        return view('transactions-create', compact('user'));
     }
 
     /**

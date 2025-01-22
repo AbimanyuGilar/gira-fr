@@ -108,7 +108,7 @@
                     <p>Total Expenses: <span class="text-red-500">{{ 'Rp'.number_format($totalExpenses, 0, ',', '.'); }}</span></p>
                 </div>
                 <div class="w-2/4 text-center transition transform duration-50 active:scale-100 hover:scale-110">
-                    <a href="{{ route('add.transaction') }}" class="">
+                    <a href="{{ route('transactions.create') }}" class="">
                         <x-primary-button>Add transaction</x-primary-button>
                     </a>
                 </div>
