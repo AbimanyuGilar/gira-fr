@@ -33,9 +33,14 @@
 
                             <p class="truncate ...">{{ $transaction->description }}</p>
                         </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
-                        </svg>
+                        @php
+                            $options = ["edit", "delete"];
+                        @endphp
+                        <x-drop-down :items="$options">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                            </svg>
+                        </x-drop-down>
                     </div>
                 @endforeach
             </div>
@@ -73,7 +78,7 @@
                                 array_push($years, $year_);
                             }
                         @endphp
-                        <x-drop-down name="year" :items="array_reverse($years)" current="{{ $year }}"></x-drop-down>
+                        <x-form-drop-down form="filter" name="year" :items="array_reverse($years)" current="{{ $year }}"></x-form-drop-down>
                     </p>
                     <p>
                         Select Month:
@@ -83,7 +88,7 @@
                                 array_push($months, $month_);
                             }
                         @endphp
-                        <x-drop-down name="month" :items="$months" current="{{ $month }}"></x-drop-down>
+                        <x-form-drop-down form="filter" name="month" :items="$months" current="{{ $month }}"></x-form-drop-down>
                     </p>
                     <p>
                         Select Day:
@@ -93,7 +98,7 @@
                                 array_push($days, $day_);
                             }
                         @endphp
-                        <x-drop-down name="day" :items="$days" current="{{ $day }}"></x-drop-down>
+                        <x-form-drop-down form="filter" name="day" :items="$days" current="{{ $day }}"></x-form-drop-down>
                     </p>
                 </form>
 
