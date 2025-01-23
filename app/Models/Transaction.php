@@ -10,4 +10,12 @@ class Transaction extends Model
     {
         return $this->belongsTo(User::class); // Relasi ke model User
     }
+
+    protected $fillable = [
+        'type',
+        'amount',
+        'description',
+        'date',
+        'user_id'
+    ];
 }

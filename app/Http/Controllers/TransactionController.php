@@ -44,7 +44,15 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Transaction::create([
+            'type' => $request->input('type'),
+            'amount' => $request->input('amount'),
+            'description' => $request->input('description'),
+            'transaction_date' => $request->input('transaction_date'),
+            'user_id' => Auth::user()->id,
+        ]);
+
+        return redirect()->route('transactions.index');
     }
 
     /**

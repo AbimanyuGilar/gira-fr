@@ -21,7 +21,7 @@
 
     <main class="flex items-center justify-center flex-grow bg-slate-300">
         <div class="grid grid-cols-3 bg-white shadow-xl h-[750px] w-[750px] rounded-xl p-5 gap-4">
-            <form action="POST" class="text-xl">
+            <form action="{{ route('transactions.store') }}" method="POST" class="text-xl">
                 @csrf
                 <div class="flex">
                     <div class="m-5 w-max">
@@ -33,8 +33,8 @@
                     </div>
 
                     <div class="m-5">
-                        <label for="date">Transaction Date</label>
-                        <input class="p-5 rounded-md shadow-md ring-1 ring-slate-900" type="datetime-local" name="date" id="date">
+                        <label for="transaction_date">Transaction Date</label>
+                        <input class="p-5 rounded-md shadow-md ring-1 ring-slate-900" type="datetime-local" name="transaction_date" id="transaction_date">
                     </div>
                 </div>
 
