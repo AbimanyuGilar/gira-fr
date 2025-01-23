@@ -21,7 +21,7 @@
 
     <main class="flex items-center justify-center flex-grow bg-slate-300">
         <div class="grid grid-cols-3 bg-white shadow-xl h-[750px] w-[750px] rounded-xl p-5 gap-4">
-            <form action="{{ route('transactions.update', 'transaction') }}" method="POST" class="text-xl">
+            <form action="{{ route('transactions.update', $transaction) }}" method="POST" class="text-xl">
                 @csrf
                 @method('PUT')
                 <div class="flex">

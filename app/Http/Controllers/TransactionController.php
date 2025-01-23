@@ -68,7 +68,10 @@ class TransactionController extends Controller
      */
     public function edit(Transaction $transaction)
     {
-        $user = Auth::user();
+        if ($transaction->user->id !== Auth::user()->id) {
+            return 'lu siapa njir';
+        }
+        $user = $transaction->user;
         return view('transactions-edit', compact('transaction', 'user'));
     }
 
@@ -77,7 +80,21 @@ class TransactionController extends Controller
      */
     public function update(Request $request, Transaction $transaction)
     {
-        //
+
+        $transaction->update([
+            'type' => $request->type,
+            'transaction_date' => $request->transaction_date,
+            'amount' => $request->amount,
+            'description' => $request->description
+        ]);
+
+        $transaction_date = Carbon::parse($request->transaction_date);
+        return redirect()->route('transactions.index', [
+            'selected' => $transaction->id,
+            'year' => $transaction_date->year,
+            'month' => $transaction_date->month,
+            'day' => $transaction_date->day
+        ]);
     }
 
     /**
