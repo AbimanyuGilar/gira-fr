@@ -68,7 +68,8 @@ class TransactionController extends Controller
      */
     public function edit(Transaction $transaction)
     {
-        //
+        $user = Auth::user();
+        return view('transactions-edit', compact('transaction', 'user'));
     }
 
     /**

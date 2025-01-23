@@ -16,9 +16,7 @@
         @click.away="isOpen = false"
     >
         <div class="py-1" role="none">
-            @foreach ($items as $item)
-                <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem" tabindex="-1" id="menu-item-0">{{ $item }}</a>
-            @endforeach
+            <a href="{{ route('transactions.edit', $transaction) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem" tabindex="-1" id="menu-item-0">Edit</a>
         </div>
     </div>
 </div>

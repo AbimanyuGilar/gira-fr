@@ -21,12 +21,14 @@
 
     <main class="flex items-center justify-center flex-grow bg-slate-300">
         <div class="grid grid-cols-3 bg-white shadow-xl h-[750px] w-[750px] rounded-xl p-5 gap-4">
-            <form action="{{ route('transactions.store') }}" method="POST" class="text-xl">
+            <form action="{{ route('transactions.update', 'transaction') }}" method="POST" class="text-xl">
                 @csrf
+                @method('PUT')
                 <div class="flex">
                     <div class="m-5 w-max">
                         <label for="type" class="">Type</label>
                         <select name="type" id="type" class="p-5 bg-white rounded-md shadow-md ring-1 ring-slate-900">
+                            <option value="{{ $transaction->type }}" selected hidden>{{ $transaction->type }}</option>
                             <option value="income">Income</option>
                             <option value="expenses">Expenses</option>
                         </select>
@@ -34,21 +36,21 @@
 
                     <div class="m-5">
                         <label for="transaction_date">Transaction Date</label>
-                        <input class="p-5 rounded-md shadow-md ring-1 ring-slate-900" type="datetime-local" name="transaction_date" id="transaction_date">
+                        <input class="p-5 rounded-md shadow-md ring-1 ring-slate-900" type="datetime-local" name="transaction_date" id="transaction_date" value="{{ $transaction->transaction_date }}">
                     </div>
                 </div>
 
                 <div class="m-5">
                     <label for="amount">Amount (Rp)</label>
-                    <input class="p-5 rounded-md shadow-md ring-1 ring-slate-900" type="number" name="amount" id="amount">
+                    <input class="p-5 rounded-md shadow-md ring-1 ring-slate-900" type="number" name="amount" id="amount" value="{{ $transaction->amount }}">
                 </div>
 
                 <div class="m-5">
                     <label for="description">Descriptions</label>
-                    <textarea class="p-5 rounded-md shadow-md ring-1 ring-slate-900" name="description" id="description" cols="30" rows="10"></textarea>
+                    <textarea class="p-5 rounded-md shadow-md ring-1 ring-slate-900" name="description" id="description" cols="30" rows="10">{{ $transaction->description }}</textarea>
                 </div>
 
-                <button type="submit" class="p-3 m-5 text-white rounded-md shadow-md bg-slate-900">Add a transaction</button>
+                <button type="submit" class="w-full p-3 m-5 text-white rounded-md shadow-md bg-slate-900">Update transaction</button>
             </form>
         </div>
     </main>
