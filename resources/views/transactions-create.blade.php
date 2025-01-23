@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="m-5">
-                        <label for="transaction_date">Transaction Date</label>
+                        <label for="transaction_date">Date (Default: today)</label>
                         <input class="p-5 rounded-md shadow-md ring-1 ring-slate-900" type="datetime-local" name="transaction_date" id="transaction_date">
                     </div>
                 </div>
