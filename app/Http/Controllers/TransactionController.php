@@ -100,8 +100,20 @@ class TransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Transaction $transaction)
+    public function destroy(Transaction $transaction, Request $request)
     {
-        //
+        if ($transaction->user->id !== Auth::user()->id) {
+            return 'lu siapa njir';
+        }
+
+        $transaction->delete();
+
+        $transaction_date = Carbon::parse($transaction->transaction_date);
+        return redirect()->route('transactions.index', [
+            'selected' => 'nothing',
+            'year' => $transaction_date->year,
+            'month' => $transaction_date->month,
+            'day' => $transaction_date->day
+        ]);
     }
 }

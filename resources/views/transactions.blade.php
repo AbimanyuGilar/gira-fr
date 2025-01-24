@@ -58,6 +58,11 @@
                             >
                                 <div class="py-1" role="none">
                                     <a href="{{ route('transactions.edit', $transaction) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50" role="menuitem" tabindex="-1" id="menu-item-0">Edit</a>
+                                    <form action="{{ route('transactions.destroy', $transaction) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" onclick="return confirm('Are you sure?')" class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 text-start" role="menuitem" tabindex="-1" id="menu-item-0">Delete</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
