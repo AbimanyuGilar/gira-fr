@@ -14,7 +14,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="flex flex-col h-screen">
-    <header class="flex items-center justify-between h-16 px-6 text-white bg-slate-900">
+    <header class="flex items-center justify-between h-16 px-6 py-5 text-white bg-slate-900">
         <p>GiraFR</p>
         <p>{{ $user->name }}</p>
     </header>
@@ -24,7 +24,7 @@
             @if (count($filteredTransactions) === 0)
                 <h1>No transaction on this day</h1>
             @else
-                <div class="overflow-y-scroll">
+                <div class="overflow-y-auto">
                     @foreach ($filteredTransactions as $transaction )
                         <div class="flex justify-end p-3 my-2 border-2 rounded-md hover:bg-gray-50 border-slate-900 h-28" onclick="event.preventDefault(); document.getElementById('selected').value='{{ $transaction->id }}'; document.getElementById('filter').submit()">
                             <div class="grid w-full grid-cols-1 rounded-xl">
@@ -79,9 +79,9 @@
                     <div>
                         <p class="text-5xl">{{ $selectedTransaction->type }}</p>
                         @if ($selectedTransaction->type == 'income')
-                            <p class="text-5xl text-green-500">{{ '+ Rp' . number_format($selectedTransaction->amount, 0, ',', '.'); }}</p>
+                            <p class="text-2xl text-green-500">{{ 'Rp' . number_format($selectedTransaction->amount, 0, ',', '.'); }}</p>
                         @else
-                            <p class="text-5xl text-red-500">{{ '- Rp' . number_format($selectedTransaction->amount, 0, ',', '.'); }}</p>
+                            <p class="text-2xl text-red-500">{{ 'Rp' . number_format($selectedTransaction->amount, 0, ',', '.'); }}</p>
                         @endif
                     </div>
                     <div>
